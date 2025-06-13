@@ -1,0 +1,48 @@
+.DS_Store
+
+# Node/npm
+node_modules/
+package-lock.json
+
+# Dotenv
+.env
+
+# Output
+dist/
+
+# Jest code coverage
+coverage/
+
+# TypeScript incremental build
+tsconfig.tsbuildinfo
+
+# Turborepo
+.turbo
+
+# All executables
+*.exe
+
+# All Java JAR files
+*.jar
+
+# All certificate files
+*.p12
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+*.bak
+
+# Cursor
+.cursor/
