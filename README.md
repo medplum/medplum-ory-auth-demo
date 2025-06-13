@@ -29,26 +29,9 @@ This demo consists of two small Express.js applications:
 
 ### How it Works
 
-The four services involved interact in a clear sequence:
+See the sequence diagram below for a visual representation of the authentication flow:
 
-```
-+----------+      1. User clicks "Login"      +-----------+
-|          | ------------------------------> |           |
-| Test App |                                 | Ory Hydra |
-| (Client) |      8. Receives code,          | (Auth     |
-|          |      gets token                 | Server)   |
-+----------+ <------------------------------ +-----------+
-     ^      7. Final Redirect with code           |      | 2. Redirect to Login
-     |                                            |      | 3. Redirect to Consent
-     |                                            v      v
-     +---------------------------------------> +----------+
-     4. Accepts Login, 6. Accepts Consent      |          |
-     (via Back-Channel API call)               | Mini-IDP |
-                                               | (Handles |
-                                               |  Login)  |
-                                               +----------+
-
-```
+![Sequence diagram of the auth flow](/sequence-diagram.png)
 
 ## Prerequisites
 
