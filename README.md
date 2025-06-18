@@ -40,7 +40,36 @@ See the sequence diagram below for a visual representation of the authentication
 
 ## Running the Demo
 
-#### 1. Start Ory Hydra
+#### 1. Configuring Medplum Server
+To use external authentication, the `medplum.config.json` used to configure medplum server needs another configuration paramter. 
+
+For this demo, add the following, then restart medplum server:
+
+``` js
+"externalAuthProviders": [
+  {
+    "issuer": "http://127.0.0.1:4444",
+    "userInfoUrl": "http://127.0.0.1:4444/userinfo"
+  }
+]
+```
+
+#### 2. Configuring a login user in Medplum
+
+The external authentication works with previously created users in Medplum that have a practitioner profile and a specific identifier attached to the practitioner resource. 
+
+Add the following identifier to a `Practitioner` resource associated with a `User` login account 
+
+``` json
+"identifier": [
+  {
+    "system": "npi",
+    "value": "1234"
+  }
+]
+```
+
+#### 3. Start Ory Hydra
 
 This is an abbreviated version of the [Ory Hydra OAuth2 Server Quickstart](https://www.ory.sh/docs/hydra/self-hosted/quickstart).
 
@@ -64,7 +93,7 @@ Then, start the Ory Hydra service using the official quickstart configuration.
 docker compose -f quickstart.yml -f quickstart-medplum.yml up --build
 ```
 
-#### 2. Clone and install this Repository
+#### 4. Clone and install this Repository
 
 In a separate terminal window, clone this repository and install the dependencies:
 
@@ -74,7 +103,7 @@ cd medplum-ory-hydra-demo
 npm install
 ```
 
-#### 3. Start the Mini-IDP
+#### 5. Start the Mini-IDP
 
 The Mini-IDP acts as the user database and must be running for Hydra to use it.
 
@@ -85,7 +114,7 @@ node mini-idp.mjs
 
 > You should see the message: `Auto-Login/Consent App running on http://localhost:6001`
 
-#### 4. Start the Test App
+#### 6. Start the Test App
 
 Finally, start the client application. It will automatically register itself with Hydra.
 
@@ -96,7 +125,7 @@ node test-app.mjs
 
 > You should see the message: `✅ Test App running on http://127.0.0.1:8080`
 
-#### 4. Run the Flow
+#### 7. Run the Flow
 
 You are now ready to test the entire flow:
 
